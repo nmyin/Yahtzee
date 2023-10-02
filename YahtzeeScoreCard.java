@@ -88,7 +88,9 @@ public class YahtzeeScoreCard {
 		}
 	}
 	
-	public void fourOfAKind(DiceGroup dg) {}
+	public void fourOfAKind(DiceGroup dg) {
+		
+	}
 	
 	public void fullHouse(DiceGroup dg) {}
 	
