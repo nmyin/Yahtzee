@@ -68,7 +68,19 @@ public class YahtzeeScoreCard {
 	 *  @param choice The choice of the player 1 to 6
 	 *  @param dg  The DiceGroup to score
 	 */
-	public void numberScore(int choice, DiceGroup dg) {}
+	public void numberScore(int choice, DiceGroup dg) {
+		int score;
+		if (choice == 7)
+			score = threeOfAKind(dg);
+		else if (choice == 8)
+			score = fourOfAKind(dg);
+		else if (choice == 9)
+			score = fullHouse(dg);
+		else if (choice == 10)
+			score = smallStraight(dg);
+		else if (choice == 11)
+			score = largeStraight();
+	}
 	
 	/**
 	 *	Updates the scorecard for Three Of A Kind choice.
@@ -76,9 +88,9 @@ public class YahtzeeScoreCard {
 	 *	@param dg	The DiceGroup to score
 	 */	
 	public void threeOfAKind(DiceGroup dg) {
-		//create an array of the rolls and see which one has the highest frequence and then check if that frequency is three
-		private int[] freq = new int[6];
-		private int max_value = 0;
+		//create an array of the rolls and see which one has the highest frequency and then check if that frequency is three
+		int[] freq = new int[6];
+		int max_value = 0;
 		for (int i = 0; i < 5; i++){
 			freq[dg.getDie(i)-1]++;
 		}
@@ -86,20 +98,64 @@ public class YahtzeeScoreCard {
 			if (freq[k] > max_value)
 				max_value = freq[k];
 		}
+		if (max_value >= 3)
+			for (int i = 0; i < dg.length(); i++){
+				max_value += dg[i];
+			}
+		return max_value;
 	}
 	
 	public void fourOfAKind(DiceGroup dg) {
-		
+		int[] freq = new int[6];
+		int max_value = 0;
+		for (int i = 0; i < 5; i++){
+			freq[dg.getDie(i)-1]++;
+		}
+		for (int k = 0; k < 6; k++){
+			if (freq[k] > max_value)
+				max_value = freq[k];
+		}
+		if (max_value >= 4)
+			for (int i = 0; i < dg.length(); i++){
+				max_value += dg[i];
+			}
+		return max_value;
 	}
 	
-	public void fullHouse(DiceGroup dg) {}
+	public void fullHouse(DiceGroup dg) {
+		int[] freq = new int[6];
+		int max_value = 0;
+		for (int i = 0; i < 5; i++){
+			freq[dg.getDie(i)-1]++;
+		}
+		for (int k = 0; k < 6; k++){
+			if (freq[k] > max_value)
+				max_value = freq[k];
+		}
+		if (max_value >= 4)
+			for (int i = 0; i < dg.length(); i++){
+				max_value += dg[i];
+			}
+		return max_value;
+	}
 	
-	public void smallStraight(DiceGroup dg) {}
+	public void smallStraight(DiceGroup dg) {
+		
+	}
 	
 	public void largeStraight(DiceGroup dg) {}
 	
 	public void chance(DiceGroup dg) {}
 	
-	public void yahtzeeScore(DiceGroup dg) {}
+	public void yahtzeeScore(DiceGroup dg) {
+	boolean same = true;
+		for (int i = 1; i < dg.length()+1; i++){
+			if (dg[i] != dg[i-1])
+				same = same && false;
+		}
+		if (same == true)
+			return 50;
+		return 0;
+	}
 
 }
