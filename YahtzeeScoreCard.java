@@ -22,7 +22,26 @@ public class YahtzeeScoreCard {
 	 *	@return				the score of that category
 	 */
 	public int getScore(i) {
-		return 0;
+		int score;
+		switch (i){
+			case 1: case 2: case 3: case 4: case 5: case 6:
+				score = numberScore(i, dg);
+			case 7:
+				score = threeOfAKind(dg);
+			case 8:
+				score = fourOfAKind(dg);
+			case 9:
+				score = fullHouse(dg);
+			case 10:
+				score = smallStraight(dg);
+			case 11:
+				score = largeStraight(dg);
+			case 12:
+				score = chance(dg);
+			case 13:
+				score = yahtzeeScore(dg);
+		}
+		return score;
 	}
 	
 	/**

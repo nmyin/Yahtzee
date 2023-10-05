@@ -37,6 +37,17 @@ public class Yahtzee {
 		System.out.println("| LET'S PLAY SOME YAHTZEE!                                                           |");
 		System.out.println("+------------------------------------------------------------------------------------+");
 		System.out.println("\n\n");
+		YahtzeePlayer playerOne = new YahtzeePlayer;
+		playerOne.setName(Prompt.getString("Player 1, please enter your first name :"));
+		YahtzeePlayer playerTwo = new YahtzeePlayer;
+		playerTwo.setName(Prompt.getString("Player 2, please enter your first name :"));
+		Prompt.getString("Let's see who will go first. " + playerOne.getName() + ", please hit enter to roll the dice :");
+		DiceGroup.rollDice();
+		for (int i = 0; i<5; i++)
+			System.out.println(dice[]);
+		
+		System.out.pritnln(playerTwo.getName() + ", it's your turn. Please hit enter to roll the dice :");
+		
 		
 	}
 }

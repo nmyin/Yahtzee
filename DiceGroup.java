@@ -22,6 +22,7 @@ public class DiceGroup {
 	 */
 	public DiceGroup() {
 		// you complete
+			die[] = new Dice[5]
 	}
 		
 	/**
@@ -30,8 +31,7 @@ public class DiceGroup {
 	public void rollDice() {
 		// you complete
 		for (int i = 0; i<5; i++){
-			Dice.roll();
-			die[i] = Dice.getLastRollValue();
+			die[i].roll();
 		}
 	}
 	
@@ -42,15 +42,12 @@ public class DiceGroup {
 	 */
 	public void rollDice(String rawHold) {
 		// you complete
-		for (int i = 0; i < die.length(); i++){
+		for (int i = 0; i < die.length; i++){
 			for (int j = 0; j < rawHold.length(); j++){
-				if ((i+1) != rawHold.getChar(j)){
-					Dice.roll();
-					die[i] = Dice.getLastRollValue();
-				}
+				if ((i+1) != rawHold.getChar(j))
+					die[i].roll();
 			}
 		}
-		
 	}
 	
 	/**
