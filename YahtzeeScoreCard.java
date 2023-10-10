@@ -18,13 +18,18 @@ public class YahtzeeScoreCard {
 	private boolean[] numScore = new boolean[13];
 	private int[] scores = new int[13];
 	
+	public YahtzeeScoreCard(){
+		for (int w = 0; w<13; w++){
+			scores[w] = -1;
+		}
+	}
 
 	/**
 	 *	Get a category score on the score card.
 	 *	@param category		the category number (1 to 13)
 	 *	@return				the score of that category
 	 */
-	public int getScore(int i, DiceGroup dg) {
+	public int getScore(int i) {
 		return scores[i-1];
 	}
 	
@@ -43,11 +48,12 @@ public class YahtzeeScoreCard {
 	/**
 	 *  Prints the player's score
 	 */
-	public void printPlayerScore(YahtzeePlayer player, DiceGroup dg) {
+	public void printPlayerScore(YahtzeePlayer player) {
+		
 		System.out.printf("| %-12s |", player.getName());
 		for (int i = 1; i < 14; i++) {
-			if (getScore(i, dg) > -1)
-				System.out.printf(" %2d |", getScore(i, dg));
+			if (getScore(i) > -1)
+				System.out.printf(" %2d |", getScore(i));
 			else System.out.printf("    |");
 		}
 		System.out.println();
@@ -64,7 +70,7 @@ public class YahtzeeScoreCard {
 	 *  @return  true if change succeeded. Returns false if choice already taken.
 	 */
 	public boolean changeScore(int choice, DiceGroup dg) {
-		if (numScore[choice-1])
+		if ((choice < 1 || choice > 13) || numScore[choice-1])
 			return false;
 		switch (choice){
 			case 1: case 2: case 3: case 4: case 5: case 6:
@@ -100,7 +106,9 @@ public class YahtzeeScoreCard {
 			if (dg.getDie(j).getLastRollValue() == choice)
 				score++;
 		}
-		return score*choice;
+		System.out.println("Hi");
+		score = score * choice;
+		return score;
 	}
 	
 	/**
@@ -116,8 +124,13 @@ public class YahtzeeScoreCard {
 		for (int i = 0; i < 5; i++){
 			freq[dg.getDie(i).getLastRollValue()-1]++;
 		}
+		boolean isThree = false;
+		for (int e = 0; e < 6; e++){
+			if (freq[e] == 3)
+				isThree = true;
+		}
 		for (int k = 0; k < 6; k++){
-			if (freq[k] > max_value)
+			if (freq[k] == 3)
 				max_value = freq[k];
 		}
 		if (max_value >= 3)

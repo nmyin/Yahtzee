@@ -42,29 +42,65 @@ public class Yahtzee {
 			
 		
 		playerOne.getScoreCard().printCardHeader();
-		playerOne.getScoreCard().printPlayerScore(playerOne, dice);
-		playerTwo.getScoreCard().printPlayerScore(playerTwo, dice);
+		playerOne.getScoreCard().printPlayerScore(playerOne);
+		playerTwo.getScoreCard().printPlayerScore(playerTwo);
 		
 		for (int h = 0; h < 13; h++){
 			System.out.println("\nRound " + (h+1) + " of 13 rounds.\n");
 			
-			prompt.getString( "\n" + playerOne.getName() + ", it's your turn to play. Please hit enter to roll the dice :");
+			Prompt.getString( "\n" + playerOne.getName() + ", it's your turn to play. Please hit enter to roll the dice :");
 			int g = 0;
-			int exit = 0;
-			while (g < 3 && exit != -1){
+			String exit = "";
 			dice.rollDice();
 			dice.printDice();
-			Which di(c)e would you like to keep?  Enter the values you'd like to 'hold' without
-spaces.  For examples, if you'd like to 'hold' die 1, 2, and 5, enter 125
-(enter -1 if you'd like to end the turn) : 123
+			while (g < 2 && !exit.equals("-1")){
+				System.out.println("Which di(c)e would you like to keep? Enter the values you'd like to 'hold' without");
+				System.out.println("spaces. For examples, if you'd liket to 'hold' without");
+				exit = Prompt.getString("(enter -1 if  you'd like to end the turn) : ");
+				if (!exit.equals("-1")){
+					dice.rollDice(exit);
+					dice.printDice();
+				}
+				g++;
+			}
+			playerOne.getScoreCard().printCardHeader();
+			playerOne.getScoreCard().printPlayerScore(playerOne);
+			playerTwo.getScoreCard().printPlayerScore(playerTwo);
+			boolean validCategory = playerOne.getScoreCard().changeScore(Prompt.getInt(playerOne.getName() + ", now you need to make a choice. Pick a valid integer from the list above :"),dice);
+			while (!validCategory){
+				validCategory = playerOne.getScoreCard().changeScore(Prompt.getInt("Pick a valid integer from the list above :"),dice);
+			}
+			playerOne.getScoreCard().printCardHeader();
+			playerOne.getScoreCard().printPlayerScore(playerOne);
+			playerTwo.getScoreCard().printPlayerScore(playerTwo);
 			
+			
+			Prompt.getString( "\n" + playerTwo.getName() + ", it's your turn to play. Please hit enter to roll the dice :");
+			g = 0;
+			exit = "";
+			dice.rollDice();
+			dice.printDice();
+			while (g < 2 && !exit.equals("-1")){
+				System.out.println("Which di(c)e would you like to keep? Enter the values you'd like to 'hold' without");
+				System.out.println("spaces. For examples, if you'd liket to 'hold' without");
+				exit = Prompt.getString("(enter -1 if  you'd like to end the turn) : ");
+				if (!exit.equals("-1")){
+					dice.rollDice(exit);
+					dice.printDice();
+				}
+				g++;
+			}
+			playerOne.getScoreCard().printCardHeader();
+			playerOne.getScoreCard().printPlayerScore(playerOne);
+			playerTwo.getScoreCard().printPlayerScore(playerTwo);
+			validCategory = playerOne.getScoreCard().changeScore(Prompt.getInt(playerTwo.getName() + ", now you need to make a choice. Pick a valid integer from the list above :"),dice);
+			while (!validCategory){
+				validCategory = playerOne.getScoreCard().changeScore(Prompt.getInt("Pick a valid integer from the list above :"),dice);
 			}
 			
-			/**
-			changeScore(prompt.getInt(player.getName + ", now you need to make a choice. Pick a valid integer from the list above :", 1, 13), dice)
-			while (!changeScore(i, dg)){
-				changeScore(prompt.getInt("Pick a valid integer from the list above :", 1, 13), dice);
-			}*/
+			playerOne.getScoreCard().printCardHeader();
+			playerOne.getScoreCard().printPlayerScore(playerOne);
+			playerTwo.getScoreCard().printPlayerScore(playerTwo);
 		}
 	}
 	
