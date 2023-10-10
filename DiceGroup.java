@@ -22,7 +22,10 @@ public class DiceGroup {
 	 */
 	public DiceGroup() {
 		// you complete
-			die[] = new Dice[5]
+			die = new Dice[5];
+			for (int i = 0; i < 5; i++) {
+            die[i] = new Dice();
+        }
 	}
 		
 	/**
@@ -44,7 +47,7 @@ public class DiceGroup {
 		// you complete
 		for (int i = 0; i < die.length; i++){
 			for (int j = 0; j < rawHold.length(); j++){
-				if ((i+1) != rawHold.getChar(j))
+				if ((i+1) != rawHold.charAt(j))
 					die[i].roll();
 			}
 		}

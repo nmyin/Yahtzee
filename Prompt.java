@@ -35,8 +35,8 @@ public class Prompt
 		}
 		catch (IOException e) {
 			System.err.println("ERROR: BufferedReader could not read line.");
+		}
 		return input;
-	}
 }
 	
 	/**
@@ -49,12 +49,12 @@ public class Prompt
 		System.out.print(ask + " --> ");
 		char input = Character.MIN_VALUE;
 		try{
-			input = buffReader.readChar[];
+			input = (char) buffReader.read();
 		}
 		catch (IOException e) {
 			System.err.println("ERROR: BufferedReader could not read line.");
+		}
 		return input;
-	}
 }
 	
 	/**
@@ -66,7 +66,7 @@ public class Prompt
 	{
 		int val = 0;
 		boolean found = false;
-		while (!Found){
+		while (!found){
 			String str = getString(ask);
 			try {
 				val = Integer.parseInt(str);
@@ -76,7 +76,7 @@ public class Prompt
 				found = false;
 			}
 		}
-		return value;
+		return val;
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class Prompt
 	{
 		double val = 0;
 		boolean found = false;
-		while (!Found){
+		while (!found){
 			String str = getString(ask);
 			try {
 				val = Double.parseDouble(str);
@@ -115,7 +115,7 @@ public class Prompt
 				found = false;
 			}
 		}
-		return value;
+		return val;
 	}
 	
 	/**
